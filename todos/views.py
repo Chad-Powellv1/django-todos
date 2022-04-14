@@ -1,6 +1,7 @@
 from .models import Todo, Event, Category
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.contrib.auth.models import User
 from rest_framework import viewsets
 from .serializers import TodoSerializer, EventSerializer, CategorySerializer
 
