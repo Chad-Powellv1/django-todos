@@ -26,33 +26,6 @@ class Priority(models.Model):
         return self.color
 
 
-class Todo(models.Model):
-    updated = models.DateField(auto_now_add=True)
-    label = models.CharField(max_length=200, null=False, blank=False)
-    description = models.CharField(max_length=300)
-    created = models.DateTimeField(auto_created=True)
-    due_date = models.DateTimeField(null=True, blank=True)
-    completed = models.DateField(null=True,blank=True)
-    priority_id = models.ForeignKey(Priority, on_delete=models.CASCADE)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.label
-
-
-class Event(models.Model):
-    updated = models.DateField(auto_now_add=True)
-    name = models.CharField(max_length=200)
-    description = models.CharField(max_length=300)
-    created = models.DateTimeField(auto_created=True)
-    start = models.DateField(null=True, blank=True)
-    end = models.DateField(null=True, blank=True)
-    all_day = models.BooleanField(default=False)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.name
-
 class Category(models.Model):
     RED = 'R'
     BLUE = 'B'
@@ -78,6 +51,36 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Todo(models.Model):
+    updated = models.DateField(auto_now_add=True)
+    label = models.CharField(max_length=200, null=False, blank=False)
+    description = models.CharField(max_length=300)
+    created = models.DateTimeField(auto_created=True)
+    due_date = models.DateTimeField(null=True, blank=True)
+    completed = models.DateField(null=True,blank=True)
+    category_id = models.ForeignKey(Category, on_delete=models.CASCADE, default='Personal')
+    priority_id = models.ForeignKey(Priority, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.label
+
+
+class Event(models.Model):
+    updated = models.DateField(auto_now_add=True)
+    name = models.CharField(max_length=200)
+    description = models.CharField(max_length=300)
+    created = models.DateTimeField(auto_created=True)
+    start = models.DateField(null=True, blank=True)
+    end = models.DateField(null=True, blank=True)
+    all_day = models.BooleanField(default=False)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
 
 class TodoCategory(models.Model):
     todo_id = models.ForeignKey(Todo, on_delete=models.CASCADE)

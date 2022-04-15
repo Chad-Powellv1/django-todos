@@ -26,8 +26,4 @@ class CategorySerializer(serializers.ModelSerializer):
 # class TodoCategorySerializer(serializers.HyperlinkedModelSerializer):
 #     class Meta:
 #         model = TodoCategory
-#         fields = [
-#             'url',
-#             'todo_id',
-#             'category_id',
-#         ]
+#         fields = '__all__'
